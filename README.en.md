@@ -64,7 +64,13 @@ This plugin takes over DSH's private sidebar/layout contracts rather than stable
 
 ## Install
 
-Clone this repository and install the directory as a bundle into your DSH profile:
+Verified on **DSH Desktop 0.2.2-rc.1 (macOS)**; other versions may break because the plugin relies on DSH's private contracts.
+
+```bash
+git clone https://github.com/Fenixgo/dsh-three-column-layout.git
+```
+
+Then install the cloned directory as a bundle into your DSH profile:
 
 - Via Agent / GUI: `plugin_manager` `install_bundle` with `target` pointing at this directory;
 - Via CLI: `dsh plugin --profile <profile> add /path/to/dsh-three-column-layout`.

@@ -105,9 +105,15 @@ English | [中文](#三栏应用布局--three-column-app-layout)
 
 ## 安装
 
-克隆本仓库后，把本目录作为一个 bundle 安装进你的 DSH profile：
+要求：已在 **DSH Desktop 0.2.2-rc.1（macOS）** 验证；其它版本可能因私有契约变化而失效。
 
-- 通过 Agent / GUI：`plugin_manager` 的 `install_bundle`，`target` 指向本目录；
+```bash
+git clone https://github.com/Fenixgo/dsh-three-column-layout.git
+```
+
+把克隆后的目录作为一个 bundle 安装进你的 DSH profile：
+
+- 通过 Agent / GUI：`plugin_manager` 的 `install_bundle`，`target` 指向该目录；
 - 通过 CLI：`dsh plugin --profile <profile> add /path/to/dsh-three-column-layout`。
 
 停用或卸载整个 bundle 即可撤销对侧栏的替换，原生侧栏自动恢复。
