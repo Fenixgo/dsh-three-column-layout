@@ -2,7 +2,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE) ![Version](https://img.shields.io/badge/version-1.3.0-blue.svg) ![DSH](https://img.shields.io/badge/DSH-0.2.2--rc.1-informational)
 
-English | [中文](#三栏应用布局--three-column-app-layout)
+[English](README.en.md) | 中文
 
 通用的 DSH 布局插件，提供应用图标栏、应用专属第二栏和主内容区。显示名称为「三栏应用布局」（英文 Three-column app layout），包标识为 `@fenixgo/dsh-three-column-layout`，Loader 行为 `layout-shell`。
 
