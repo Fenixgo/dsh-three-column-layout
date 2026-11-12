@@ -6,7 +6,7 @@
 
 通用的 DSH 布局插件，提供应用图标栏、应用专属第二栏和主内容区。显示名称为「三栏应用布局」（英文 Three-column app layout），包标识为 `@fenixgo/dsh-three-column-layout`，Loader 行为 `layout-shell`。
 
-![三栏应用布局桌面端预览](docs/preview.png)
+![三栏应用布局桌面端预览](docs/screenshot.png)
 
 > 截图中工作区、会话名和业务内容已打码。
 
@@ -127,7 +127,7 @@ git clone https://github.com/Fenixgo/dsh-three-column-layout.git
 - `cordis.patch.yml`：替换原生侧栏的补丁。
 - `locale/zh.json`、`locale/en.json`：插件管理页显示名称与描述。
 - `icon.svg`：插件图标。
-- `docs/preview.png`：插件说明中的桌面端预览图（业务内容已打码）。
+- `docs/screenshot.png`：插件说明中的桌面端预览图（业务内容已打码）。
 - `CHANGELOG.md`、`CONTRIBUTING.md`：版本历史与贡献说明。
 
 ## 开发说明

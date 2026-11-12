@@ -6,7 +6,7 @@
 
 A generic DeepSeek Harness (DSH) layout plugin that replaces the stock sidebar with an application rail, an app-specific secondary column, and the content area. Package id: `@fenixgo/dsh-three-column-layout`, loader row: `layout-shell`.
 
-![Desktop preview](docs/preview.png)
+![Desktop preview](docs/screenshot.png)
 
 > Workspaces, session titles, and business content in the screenshot are blurred.
 
@@ -86,7 +86,7 @@ Disabling or removing the bundle restores the stock sidebar.
 - `cordis.patch.yml` — the sidebar-replacing patch.
 - `locale/zh.json`, `locale/en.json` — display name and description on the plugin page.
 - `icon.svg` — plugin icon.
-- `docs/preview.png` — desktop preview used in the plugin page (business content blurred).
+- `docs/screenshot.png` — desktop preview used in the plugin page (business content blurred).
 - `CHANGELOG.md`, `CONTRIBUTING.md` — version history and contribution notes.
 
 ## Development
