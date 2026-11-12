@@ -1,0 +1,7 @@
+{
+  "meta": {
+    "title": "三栏应用布局",
+    "description": "60px 应用栏、默认 280px 应用第二栏和内容区；会话、插件与定时任务统一归入 DSH。",
+    "detail": "README.md"
+  }
+}

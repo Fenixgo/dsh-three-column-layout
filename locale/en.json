@@ -1,0 +1,7 @@
+{
+  "meta": {
+    "title": "Three-column app layout",
+    "description": "A 60px application rail, a default 280px application sidebar, and the content area. Conversations, plugins, and schedules are grouped under DSH.",
+    "detail": "README.en.md"
+  }
+}

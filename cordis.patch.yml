@@ -1,0 +1,8 @@
+# 三栏应用布局: replaces the shipped sidebar with an application rail
+# and application-specific secondary column.
+# Removing this bundle restores the shipped sidebar.
+- id: ui-sidebar
+  disabled: true
+- insert:
+    - id: layout-shell
+      name: '@fenixgo/dsh-three-column-layout'

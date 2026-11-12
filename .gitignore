@@ -1,0 +1,14 @@
+# macOS
+.DS_Store
+
+# dependencies / build output (a linked package normally has none)
+node_modules/
+dist/
+
+# logs
+*.log
+npm-debug.log*
+
+# editor
+.vscode/
+.idea/
