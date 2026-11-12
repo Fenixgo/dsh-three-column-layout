@@ -1,5 +1,7 @@
 # Three-Column App Layout for DSH | DSH 三栏应用布局
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE) ![Version](https://img.shields.io/badge/version-1.3.0-blue.svg) ![DSH](https://img.shields.io/badge/DSH-0.2.2--rc.1-informational)
+
 [中文](#三栏应用布局) | English
 
 A generic DeepSeek Harness (DSH) layout plugin that replaces the stock sidebar with an application rail, an app-specific secondary column, and the content area. Package id: `@fenixgo/dsh-three-column-layout`, loader row: `layout-shell`.
