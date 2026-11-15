@@ -47,6 +47,29 @@ window.__ModuleLoader__.load({
       };
     })();
 
+    /**
+     * `sidebar.workspaces` slot hook context (DSH >= 0.2.2-rc.3).
+     *
+     * Since rc.3 the workspaces hole declares a `SidebarSectionHookContext` (a
+     * `useSectionScroller` hook) and expects the declaring entry to hand it to
+     * the occupant through a matching `inject` (`SidebarSectionInjected`).
+     * ui-workspace's WorkspaceBrowser calls `useSectionScroller()` and binds the
+     * returned `bindScrollerRef` to its list area; if either the render-time
+     * `hookContext` or the child `inject` is missing, the browser fails to mount
+     * and the session list area stays blank. This layout owns the second column's
+     * own scrolling, so a stable no-op scroller is enough to keep the browser
+     * mounting — the list still scrolls through its own CSS overflow.
+     */
+    const sectionScroller = { bindScrollerRef: () => {} };
+    const useSectionScroller = () => sectionScroller;
+    const SECTION_HOOK_CONTEXT = { useSectionScroller };
+    const SIDEBAR_SECTION_INJECT = {
+      hooks: {
+        sectionScroller: (_standard, hookContext) =>
+          (hookContext && hookContext.useSectionScroller) || useSectionScroller,
+      },
+    };
+
     /** Rail geometry while the second column is folded away: flush left, full height. */
     const dockStyle = {
       position: 'fixed',
@@ -458,7 +481,16 @@ window.__ModuleLoader__.load({
           fontSize: 13,
           cursor: 'pointer',
         },
-        region: { flex: '1 1 auto', minHeight: 0, overflow: 'hidden' },
+        region: {
+          flex: '1 1 auto',
+          minHeight: 0,
+          overflow: 'hidden',
+          // DSH rc.3's WorkspaceBrowser sizes itself with `max-height:100cqh`,
+          // measured against a size-query container (native `.scrollRegion`).
+          // Without this, `cqh` falls back to the viewport and the session list
+          // can overflow the column and fail to scroll.
+          containerType: 'size',
+        },
         appCard: {
           display: 'flex',
           flexDirection: 'column',
@@ -1325,7 +1357,11 @@ window.__ModuleLoader__.load({
               h(
                 'div',
                 { style: s.region },
-                render('sidebar.workspaces', { wide: true, expandSidebar: () => {} }),
+                render(
+                  'sidebar.workspaces',
+                  { wide: true, expandSidebar: () => {} },
+                  { hookContext: SECTION_HOOK_CONTEXT },
+                ),
               ),
             ),
             isHome
@@ -1550,7 +1586,11 @@ window.__ModuleLoader__.load({
                 'sidebar.toggle.badge': { kind: 'single', scope: 'root' },
                 'sidebar.panellist': { kind: 'list', scope: 'root' },
                 'sidebar.panellist.actions': { kind: 'list', scope: 'root' },
-                'sidebar.workspaces': { kind: 'single', scope: 'root' },
+                'sidebar.workspaces': {
+                  kind: 'single',
+                  scope: 'root',
+                  inject: SIDEBAR_SECTION_INJECT,
+                },
                 'sidebar.settings': { kind: 'single', scope: 'root' },
                 'sidebar.footer.action': { kind: 'list', scope: 'root' },
                 'sidebar.app.column': { kind: 'list', scope: 'root' },

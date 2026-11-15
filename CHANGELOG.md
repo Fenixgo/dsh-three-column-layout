@@ -3,7 +3,12 @@
 All notable changes to this project are documented here.
 The format follows [Keep a Changelog](https://keepachangelog.com/), and the project uses [Semantic Versioning](https://semver.org/).
 
-> **Compatibility note:** this plugin targets DSH **Desktop 0.2.2-rc.1 (macOS)** and depends on DSH's private sidebar/layout contracts. Expect parts of it to need updates when DSH upgrades. See the compatibility section in the README.
+> **Compatibility note:** this plugin targets DSH **Desktop 0.2.2-rc.3 (macOS)** and depends on DSH's private sidebar/layout contracts. Expect parts of it to need updates when DSH upgrades. See the compatibility section in the README.
+
+## [1.3.1]
+
+### Fixed
+- `sidebar.workspaces`: adapt to DSH 0.2.2-rc.3's new `SidebarSectionHookContext` / `SidebarSectionInjected` slot contract. Since rc.3 the workspaces hole must be declared with an `inject` hook and rendered with a `hookContext` carrying `useSectionScroller`; without them ui-workspace's `WorkspaceBrowser` no longer mounts and the session/workspace list renders blank. The plugin now supplies both (a stable no-op scroller, since this layout owns its own column scrolling) and makes the workspaces region a size-query container so the browser's `max-height:100cqh` sizing (and thus list scrolling) resolves as in DSH's own sidebar. Verified against DSH Desktop 0.2.2-rc.3 (macOS).
 
 ## [1.3.0]
 

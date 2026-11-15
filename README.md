@@ -1,6 +1,6 @@
 # 三栏应用布局 | Three-Column App Layout
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE) ![Version](https://img.shields.io/badge/version-1.3.0-blue.svg) ![DSH](https://img.shields.io/badge/DSH-0.2.2--rc.1-informational)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE) ![Version](https://img.shields.io/badge/version-1.3.1-blue.svg) ![DSH](https://img.shields.io/badge/DSH-0.2.2--rc.3-informational)
 
 [English](README.en.md) | 中文
 
@@ -32,7 +32,7 @@
 
 ### 基线
 
-- 当前按 **DSH Desktop 0.2.2-rc.1（macOS）** 验证；Windows 标题栏、无 macOS 红绿灯的路径未逐项验证。
+- 当前按 **DSH Desktop 0.2.2-rc.3（macOS）** 验证；Windows 标题栏、无 macOS 红绿灯的路径未逐项验证。
 - 本质是 **Client-only bundle**：Host 入口为空，不注册 Host Service、不读写存储、不访问网络。
 - 插件安装形式是工作区本地 `link:` 目录，不是发布到 registry 的稳定包。
 
@@ -52,6 +52,7 @@
    - 依赖：`sidebar`、`sidebar.panellist`、`sidebar.panellist.actions`、`sidebar.workspaces`、`sidebar.settings`、`sidebar.footer.action`、`sidebar.app.column`、`sidebar.brand.mark`、`sidebar.brand.name`、`sidebar.toggle.badge`、`shell.leading`。
    - `sidebar` 的 `collapsed`、`width`、`drawer`、`renderSlot` owner props 也必须保持。
    - 任一改名/删除会导致应用列表为空、第二栏没有内容或底部账户入口消失。
+   - rc.3 起 `sidebar.workspaces` 子槽必须声明 `inject`（`SidebarSectionInjected`），并在渲染时传 `hookContext`（含 `useSectionScroller`）；缺任一项会让 ui-workspace 的会话/工作区列表空白（应用图标与账户入口仍在）。
 
 4. **Client CSS/DOM 选择器**
    - 使用 `.PIRFFq_centerCol`、`.kiGsTW_header`、`.kiGsTW_titleRow`、`.kiGsTW_titleCluster`、`.kiGsTW_crumb`、`.kiGsTW_tabs`。
@@ -94,6 +95,8 @@
 6. 若 DSH 新增内部面板，更新 `INSIDE_PANEL_IDS`，否则它会错误地出现在第一栏。
 7. 升级前保留旧 profile 备份；升级后若布局错乱，先禁用本 bundle 验证原生 sidebar 是否恢复。
 
+> rc.3 适配要点：`sidebar.workspaces` 子槽必须带 `inject`（`SidebarSectionInjected`），并在渲染时传 `hookContext`（含 `useSectionScroller`）；本插件已按此实现。若升级后会话/工作区列表空白，先检查这两项与 region 是否为 size 查询容器。
+
 ### 已知失败表现
 
 | 变化 | 可能出现的结果 |
@@ -101,13 +104,14 @@
 | `ui-sidebar` id 改变 | 原生侧栏和本插件同时出现，或插件完全不接管 |
 | `setSidebar` 内部方法消失 | 展开宽度仍为 280px，第二栏面板与主内容错位 |
 | `sidebar.*` 槽位改名 | 应用列表为空、第二栏空态、账户入口消失 |
+| `sidebar.workspaces` 缺 rc.3 `hookContext`/`inject` | 会话/工作区列表空白，应用图标与账户入口仍在 |
 | `.kiGsTW_*` / `data-animating` 改名 | 标题不对齐、收起占位错误、动画提前/滞后 |
 | 主题 token 改名 | 蓝色/边框/背景观感异常，但通常不崩溃 |
 | 与其它 `sidebar` 替代插件共存 | 双栏、重复图标或注册顺序不确定 |
 
 ## 安装
 
-要求：已在 **DSH Desktop 0.2.2-rc.1（macOS）** 验证；其它版本可能因私有契约变化而失效。
+要求：已在 **DSH Desktop 0.2.2-rc.3（macOS）** 验证；其它版本可能因私有契约变化而失效。
 
 ```bash
 git clone https://github.com/Fenixgo/dsh-three-column-layout.git

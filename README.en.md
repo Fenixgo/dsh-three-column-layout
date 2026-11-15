@@ -1,6 +1,6 @@
 # Three-Column App Layout for DSH | DSH 三栏应用布局
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE) ![Version](https://img.shields.io/badge/version-1.3.0-blue.svg) ![DSH](https://img.shields.io/badge/DSH-0.2.2--rc.1-informational)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE) ![Version](https://img.shields.io/badge/version-1.3.1-blue.svg) ![DSH](https://img.shields.io/badge/DSH-0.2.2--rc.3-informational)
 
 [中文](README.md) | English
 
@@ -25,13 +25,13 @@ A generic DeepSeek Harness (DSH) layout plugin that replaces the stock sidebar w
 
 ## Constraints, compatibility, and DSH upgrades
 
-This plugin takes over DSH's private sidebar/layout contracts rather than stable public APIs. Verified against **DSH Desktop 0.2.2-rc.1 (macOS)**. It is a Client-only bundle: the Host entry is empty, and no storage or network access happens.
+This plugin takes over DSH's private sidebar/layout contracts rather than stable public APIs. Verified against **DSH Desktop 0.2.2-rc.3 (macOS)**. It is a Client-only bundle: the Host entry is empty, and no storage or network access happens.
 
 ### Hard dependencies to re-verify after a DSH upgrade
 
 1. **The `ui-sidebar` row still exists and can be disabled** — `cordis.patch.yml` relies on `- id: ui-sidebar / disabled: true`. If the row id or its package changes, the stock sidebar appears alongside this plugin.
 2. **`ctx.layout.panels.setSidebar(px)` still exists** — the public `ctx.layout` only guarantees `selectPanel` / `toggleSidebar` / right-panel methods; setting the left track width uses this internal action. Without it, expansion may stay at the stock 280px and the 280px panel mismatches the actual track.
-3. **Slot names and owner props** — `sidebar`, `sidebar.panellist`, `sidebar.panellist.actions`, `sidebar.workspaces`, `sidebar.settings`, `sidebar.footer.action`, `sidebar.app.column`, `sidebar.brand.mark`, `sidebar.brand.name`, `sidebar.toggle.badge`, `shell.leading`; plus the `sidebar` owner props `collapsed`, `width`, `drawer`, `renderSlot`. Renames leave the app list empty or drop the account entry.
+3. **Slot names and owner props** — `sidebar`, `sidebar.panellist`, `sidebar.panellist.actions`, `sidebar.workspaces`, `sidebar.settings`, `sidebar.footer.action`, `sidebar.app.column`, `sidebar.brand.mark`, `sidebar.brand.name`, `sidebar.toggle.badge`, `shell.leading`; plus the `sidebar` owner props `collapsed`, `width`, `drawer`, `renderSlot`. Renames leave the app list empty or drop the account entry. Since rc.3 the `sidebar.workspaces` child must also declare `inject` (`SidebarSectionInjected`) and be rendered with a `hookContext` (holding `useSectionScroller`); omitting either blanks the session/workspace list while the app icons and account entry stay.
 4. **Client CSS/DOM selectors** — `.PIRFFq_centerCol`, `.kiGsTW_header`, `.kiGsTW_titleRow`, `.kiGsTW_titleCluster`, `.kiGsTW_crumb`, `.kiGsTW_tabs`, and the `data-sidebar-collapsed`, `data-animating`, `data-shell-bottom` attributes. Changes break header alignment, collapse compensation, or animation timing.
 5. **`dsh.client.inject` package names** — `@deepseek-ai/dsh-client-ui-layout`, `@deepseek-ai/dsh-client-ui-sidebar`, `@deepseek-ai/dsh-client-ui-workspace`.
 
@@ -64,9 +64,11 @@ This plugin takes over DSH's private sidebar/layout contracts rather than stable
 6. Update `INSIDE_PANEL_IDS` when DSH adds internal panels.
 7. Keep a profile backup before upgrading; if layout breaks, disable this bundle first to confirm the stock sidebar recovers.
 
+> rc.3 note: the `sidebar.workspaces` child must declare `inject` (`SidebarSectionInjected`) and be rendered with a `hookContext` (holding `useSectionScroller`); this plugin implements both. If the session/workspace list is blank after an upgrade, check these two and that the region is a size-query container first.
+
 ## Install
 
-Verified on **DSH Desktop 0.2.2-rc.1 (macOS)**; other versions may break because the plugin relies on DSH's private contracts.
+Verified on **DSH Desktop 0.2.2-rc.3 (macOS)**; other versions may break because the plugin relies on DSH's private contracts.
 
 ```bash
 git clone https://github.com/Fenixgo/dsh-three-column-layout.git
